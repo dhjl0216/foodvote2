@@ -91,3 +91,12 @@ function editSuggestion(id) {
   linkEl.href = suggestion.link;
   linkEl.textContent = suggestion.link ? "View Link" : "";
 }
+
+function sortByVotes() {
+  const suggestions = JSON.parse(localStorage.getItem("foodSuggestions")) || [];
+  suggestions.sort((a, b) => b.votes - a.votes);
+  localStorage.setItem("foodSuggestions", JSON.stringify(suggestions));
+
+  document.getElementById("suggestionsList").innerHTML = "";
+  suggestions.forEach(displaySuggestion);
+}
